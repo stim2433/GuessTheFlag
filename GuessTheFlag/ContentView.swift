@@ -7,6 +7,19 @@
 
 import SwiftUI
 
+struct CapsulImageFlag: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .cornerRadius(20)
+            .shadow(radius: 5)
+    }
+}
+
+extension View {
+    func capsuleImage() -> some View {
+        modifier(CapsulImageFlag())
+    }
+}
 
 struct ContentView: View {
     @State private var countries = ["Estonia", "France", "Germany", "Ireland", "Italy", "Nigeria", "Poland", "Spain", "UK", "Ukraine", "US"].shuffled()
@@ -52,14 +65,14 @@ struct ContentView: View {
                             }
                         } label: {
                             Image(countries[number])
-//                                .clipShape(.capsule)
-                                .shadow(radius: 5)
+                                .capsuleImage()
                         }
                     }
                 }
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 20)
                 .background(.regularMaterial)
+                .cornerRadius(20)
 //                .clipShape(.rect(cornerRadius: 20))
 
                 Spacer()
